@@ -1,10 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>San Valentín 💘</title>
+
+<style>
+body {
+    background-color: #ffe6eb;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 60px;
+    overflow: hidden;
+}
+
+h1 { color: #e6005c; }
+
+.imagen {
+    width: 260px;
+    border-radius: 20px;
+    margin: 20px auto;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: none;
+}
+
+button {
+    font-size: 20px;
+    padding: 15px 30px;
+    margin: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#si { background-color: #ff4d88; color: white; }
+#no { background-color: #999; color: white; }
+
+/* ❤️ CORAZONES ❤️ */
+#contenedor-corazones {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.corazon {
+    position: absolute;
+    width: 60px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.explosion {
+    animation: explotar 0.5s forwards;
+}
+
+@keyframes explotar {
+    to { transform: scale(2); opacity: 0; }
+}
+
+/* ❤️ FINAL ❤️ */
+#final {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: #ffe6eb;
+    z-index: 20;
+    padding-top: 60px;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="titulo">💘 ¿Quieres ser mi San Valentín? 💘</h1>
+
+<img id="foto" class="imagen" src="img/malo_1.gif">
+
+<div id="botones">
+    <button id="si" onclick="aceptar()">Sí 💖</button>
+    <button id="no" onclick="rechazar()">No 💔</button>
+</div>
+
+<div id="contenedor-corazones"></div>
+
+<div id="final">
+    <h1>🥰 Sabía que dirías que sí 💖</h1>
+    <h1>💋 BESITO BESITO 💋</h1>
+    <h1>😍 WUAPAAAAA 😍</h1>
+    <h1>💘 TE QUIERO MUCHO 💘</h1>
+    <img src="img/bueno_1.gif" style="width:300px;border-radius:20px;">
+</div>
+
 <script>
+/* ❌ BOTÓN NO ❌ */
 let tamañoSi = 20;
 let tamañoNo = 20;
-let indiceImagen = 0;
-let indiceFrase = 0;
+let iImg = 0;
+let iTxt = 0;
 
-/* ❌ NO ❌ */
 const imagenes = [
     "img/malo_1.gif",
     "img/malo_2.jpg",
@@ -23,45 +116,38 @@ const frasesNo = [
 ];
 
 function rechazar() {
-    indiceImagen = (indiceImagen + 1) % imagenes.length;
-    const foto = document.getElementById("foto");
-    foto.src = imagenes[indiceImagen];
+    iImg = (iImg + 1) % imagenes.length;
+    foto.src = imagenes[iImg];
     foto.style.display = "block";
 
     tamañoSi += 6;
     tamañoNo -= 3;
+    si.style.fontSize = tamañoSi + "px";
+    no.style.fontSize = tamañoNo + "px";
 
-    document.getElementById("si").style.fontSize = tamañoSi + "px";
-    document.getElementById("no").style.fontSize = tamañoNo + "px";
+    iTxt = (iTxt + 1) % frasesNo.length;
+    no.innerText = frasesNo[iTxt];
 
-    indiceFrase = (indiceFrase + 1) % frasesNo.length;
-    document.getElementById("no").innerText = frasesNo[indiceFrase];
-
-    if (tamañoNo <= 6) {
-        document.getElementById("no").style.display = "none";
-    }
+    if (tamañoNo <= 6) no.style.display = "none";
 }
 
 /* ❤️ CORAZONES ❤️ */
-let corazonesCreados = 0;
-let corazonesReventados = 0;
-const MAX_CORAZONES = 70;
-let intervaloCorazones;
+let creados = 0;
+let reventados = 0;
+const MAX = 70;
 
 function aceptar() {
-    // Ocultar cosas iniciales
-    document.querySelector("h1").style.display = "none";
-    document.getElementById("foto").style.display = "none";
-    document.getElementById("si").style.display = "none";
-    document.getElementById("no").style.display = "none";
+    titulo.style.display = "none";
+    botones.style.display = "none";
+    foto.style.display = "none";
 
-    intervaloCorazones = setInterval(() => {
-        if (corazonesCreados >= MAX_CORAZONES) {
-            clearInterval(intervaloCorazones);
+    const intervalo = setInterval(() => {
+        if (creados >= MAX) {
+            clearInterval(intervalo);
             return;
         }
         crearCorazon();
-        corazonesCreados++;
+        creados++;
     }, 120);
 }
 
@@ -72,40 +158,24 @@ function crearCorazon() {
 
     c.style.left = Math.random() * (window.innerWidth - 60) + "px";
     c.style.top = Math.random() * (window.innerHeight - 60) + "px";
-    c.style.animation = "none"; // ❗ se quedan quietos
 
-    c.onclick = () => explotarCorazon(c);
+    c.onclick = () => explotar(c);
 
-    document.body.appendChild(c);
+    document.getElementById("contenedor-corazones").appendChild(c);
 }
 
-function explotarCorazon(c) {
+function explotar(c) {
     c.classList.add("explosion");
-    corazonesReventados++;
+    reventados++;
+    setTimeout(() => c.remove(), 500);
 
-    setTimeout(() => c.remove(), 600);
-
-    if (corazonesReventados === 7) {
-        mostrarFinal();
+    if (reventados === 7) {
+        setTimeout(() => {
+            document.getElementById("final").style.display = "block";
+        }, 600);
     }
 }
-
-function mostrarFinal() {
-    document.body.innerHTML += `
-        <div style="
-            position: fixed;
-            inset: 0;
-            background:#ffe6eb;
-            z-index: 10000;
-            text-align:center;
-            padding-top:60px;
-        ">
-            <h1>🥰 Sabía que dirías que sí 💖</h1>
-            <h1>💋 BESITO BESITO 💋</h1>
-            <h1>😍 WUAPAAAAA 😍</h1>
-            <h1>💘 TE QUIERO MUCHO 💘</h1>
-            <img src="img/bueno_1.gif" style="width:300px;border-radius:20px;">
-        </div>
-    `;
-}
 </script>
+
+</body>
+</html>
