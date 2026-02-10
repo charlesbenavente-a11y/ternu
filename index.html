@@ -88,7 +88,7 @@ button {
     <h1>💋 BESITO BESITO 💋</h1>
     <h1>😍 WUAPAAAAA 😍</h1>
     <h1>💘 TE QUIERO MUCHO 💘</h1>
-    <img src="img/bueno_1.gif" style="width:300px;border-radius:20px;">
+    <img src="img/bueno_1.webp" style="width:300px;border-radius:20px;">
 </div>
 
 <script>
@@ -153,7 +153,7 @@ function aceptar() {
 
 function crearCorazon() {
     const c = document.createElement("img");
-    c.src = "img/cozaron.jpg";
+    c.src = "img/corazon.png";
     c.className = "corazon";
 
     c.style.left = Math.random() * (window.innerWidth - 60) + "px";
@@ -169,7 +169,7 @@ function explotar(c) {
     reventados++;
     setTimeout(() => c.remove(), 500);
 
-    if (reventados === 7) {
+    if (reventados === 5) {
         setTimeout(() => {
             document.getElementById("final").style.display = "block";
         }, 600);
