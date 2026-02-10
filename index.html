@@ -43,6 +43,42 @@
             background-color: #999;
             color: white;
         }
+
+        /* ❤️ CORAZONES ❤️ */
+        .corazon {
+            position: fixed;
+            font-size: 28px;
+            cursor: pointer;
+            animation: flotar 6s linear forwards;
+            user-select: none;
+            z-index: 9999;
+        }
+
+        @keyframes flotar {
+            from {
+                transform: translateY(110vh);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        .explosion {
+            animation: explotar 0.6s forwards;
+        }
+
+        @keyframes explotar {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -50,7 +86,7 @@
 
     <h1>💘 ¿Quieres ser mi San Valentín? 💘</h1>
 
-    <img id="foto" class="imagen" src="img/malo_1.jpg" alt="foto">
+    <img id="foto" class="imagen" src="img/malo_1.gif" alt="foto">
 
     <div>
         <button id="si" onclick="aceptar()">Sí 💖</button>
@@ -64,8 +100,8 @@
     let indiceFrase = 0;
 
     const imagenes = [
-        "img/malo_1.jpg",
-        "img/malo_2.gif",
+        "img/malo_1.gif",
+        "img/malo_2.jpg",
         "img/malo_3.webp",
         "img/malo_4.jpg",
         "img/malo_5.gif"
@@ -81,37 +117,73 @@
     ];
 
     function rechazar() {
-        // Mostrar y cambiar imagen
         indiceImagen = (indiceImagen + 1) % imagenes.length;
         const foto = document.getElementById("foto");
         foto.src = imagenes[indiceImagen];
         foto.style.display = "block";
 
-        // Cambiar tamaños
         tamañoSi += 6;
         tamañoNo -= 3;
 
         document.getElementById("si").style.fontSize = tamañoSi + "px";
         document.getElementById("no").style.fontSize = tamañoNo + "px";
 
-        // Cambiar texto del NO
         indiceFrase = (indiceFrase + 1) % frasesNo.length;
         document.getElementById("no").innerText = frasesNo[indiceFrase];
 
-        // Ocultar NO si se hace muy pequeño
         if (tamañoNo <= 6) {
             document.getElementById("no").style.display = "none";
         }
     }
 
+    /* ❤️ CORAZONES ❤️ */
+    let corazones = [];
+
+    function llenarPantallaDeCorazones() {
+        for (let i = 0; i < 70; i++) {
+            setTimeout(crearCorazon, i * 80);
+        }
+    }
+
+    function crearCorazon() {
+        const corazon = document.createElement("div");
+        corazon.className = "corazon";
+        corazon.innerText = "❤️";
+
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+        corazon.addEventListener("click", explotarTodos);
+
+        document.body.appendChild(corazon);
+        corazones.push(corazon);
+
+        setTimeout(() => corazon.remove(), 7000);
+    }
+
+    function explotarTodos() {
+        corazones.forEach((c, i) => {
+            setTimeout(() => {
+                c.classList.add("explosion");
+                setTimeout(() => c.remove(), 600);
+            }, i * 40);
+        });
+        corazones = [];
+    }
+
     function aceptar() {
         document.body.innerHTML = `
             <h1>🥰 Sabía que dirías que sí 💖</h1>
-            <h1> BESITO BESITO </h1>
-            <h1> WUAPAAAAA </h1>
-            <h1> TE QUIERO MUCHO </h1>
-            <p>Feliz San Valentín 💕</p>
+            <h1>💋 BESITO BESITO 💋</h1>
+            <h1>😍 WUAPAAAAA 😍</h1>
+            <h1>💘 TE QUIERO MUCHO 💘</h1>
+
+            <img src="img/bueno_1.gif" style="width:300px; border-radius:20px;">
+
+            <p>Haz click en un corazón ❤️</p>
         `;
+
+        llenarPantallaDeCorazones();
     }
 </script>
 
