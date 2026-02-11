@@ -173,8 +173,26 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 80px;
     z-index: 100;
+}
+
+#pantalla3 {
+    gap: 10px;              /* junta papel, imagen y botones */
+    position: absolute;     /* permite scroll */
+    min-height: 100vh;
+    overflow-y: auto;       /* activa scroll vertical */
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#pantalla3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 .pantalla.activa {
