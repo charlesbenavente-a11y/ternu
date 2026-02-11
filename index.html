@@ -8,7 +8,7 @@
 
     .caja-papel {
     display: inline-block;
-    background-image: url("img/papel.png");
+    background-image: url("img/papel_h.png");
     background-size: cover;
     background-position: center;
     padding: 80px 120px;
@@ -131,9 +131,11 @@ button {
     display: none;
     position: fixed;
     inset: 0;
-    background-color: #ffe6eb;
+    background-image: url("img/papel_v.png");
+    background-size: cover;
+    background-position: center;
     z-index: 20;
-    padding-top: 60px;
+    padding-top: 120px;
 }
 
 #titulo,
@@ -393,6 +395,8 @@ function explotar(c) {
 }
 
 </script>
+
+<div id="contenedor-corazones"></div>
 
 </body>
 </html>
