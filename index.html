@@ -5,6 +5,29 @@
 <title>San Valentín 💘</title>
 
 <style>
+
+    .caja-papel {
+    display: inline-block;
+    background-image: url("img/papel.png");
+    background-size: cover;
+    background-position: center;
+    padding: 80px 120px;
+    border-radius: 40px;
+    position: relative;
+    z-index: 20;
+}
+
+.caja-papel-final {
+    display: inline-block;
+    background-image: url("img/papel_v.png");
+    background-size: cover;
+    background-position: center;
+    padding: 100px 140px;
+    border-radius: 50px;
+    position: relative;
+    z-index: 30;
+}
+
 body {
     background-color: #ffe6eb;
     font-family: Arial, sans-serif;
@@ -124,8 +147,6 @@ button {
 </head>
 
 <body>
-
-<h1 id="titulo">💘 ¿Quieres ser mi San Valentín? 💘</h1>
 
 <div class="bandas">
 
@@ -260,21 +281,30 @@ button {
 
 </div>
 
-<img id="foto" class="imagen" src="img/malo_1.gif">
+<div class="caja-papel" id="caja-pregunta">
 
-<div id="botones">
-    <button id="si" onclick="aceptar()">Sí 💖</button>
-    <button id="no" onclick="rechazar()">No 💔</button>
+    <h1 id="titulo">💘 ¿Quieres ser mi San Valentín? 💘</h1>
+
+    <img id="foto" class="imagen" src="img/malo_1.gif">
+
+    <div id="botones">
+        <button id="si" onclick="aceptar()">Sí 💖</button>
+        <button id="no" onclick="rechazar()">No 💔</button>
+    </div>
+
 </div>
 
-<div id="contenedor-corazones"></div>
-
 <div id="final">
-    <h1>🥰 Sabía que dirías que sí </h1>
-    <h1> BESITO BESITO </h1>
-    <h1> WUAPAAAAA </h1>
-    <h1> TE QUIERO MUCHO💖 </h1>
-    <img src="img/bueno_1.webp" style="width:900px;border-radius:60px;">
+    <div class="caja-papel-final">
+
+        <h1>🥰 Sabía que dirías que sí 💖</h1>
+        <h1>💋 BESITO BESITO 💋</h1>
+        <h1>😍 WUAPAAAAA 😍</h1>
+        <h1>💘 TE QUIERO MUCHO 💘</h1>
+
+        <img src="img/bueno_1.webp" style="width:900px;border-radius:60px;">
+
+    </div>
 </div>
 
 <script>
@@ -361,6 +391,7 @@ function explotar(c) {
         }, 600);
     }
 }
+
 </script>
 
 </body>
