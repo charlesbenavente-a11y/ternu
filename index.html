@@ -6,15 +6,16 @@
 
 <style>
 
-    .caja-papel {
+   .caja-papel {
     display: inline-block;
     background-image: url("img/papel_h.png");
-    background-size: cover;
+    background-size: contain;   /* 👈 CLAVE */
+    background-repeat: no-repeat;
     background-position: center;
-    padding: 80px 120px;
+    padding: 140px 200px;       /* un poco más de aire */
     border-radius: 40px;
     position: relative;
-    z-index: 20;
+    z-index: 50;
 }
 
 .caja-papel-final {
@@ -30,7 +31,7 @@
 
 body {
     background-color: #ffe6eb;
-    font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
     margin-top: 180px;
     overflow: hidden;
@@ -47,6 +48,10 @@ h1 {
     margin: 20px auto;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     display: none;
+}
+
+.imagen.pequeña {
+    width: 620px;
 }
 
 button {
@@ -131,9 +136,7 @@ button {
     display: none;
     position: fixed;
     inset: 0;
-    background-image: url("img/papel_v.png");
-    background-size: cover;
-    background-position: center;
+    background-color: #ffe6eb; /* solo color */
     z-index: 20;
     padding-top: 120px;
 }
@@ -287,7 +290,7 @@ button {
     <h1 id="titulo">💘 ¿Quieres ser mi San Valentín? 💘</h1>
 </div>
 
-<img id="foto" class="imagen" src="img/malo_1.gif">
+<img id="foto" class="imagen pequeña" src="img/malo_1.gif">
 
 <div id="botones">
     <button id="si" onclick="aceptar()">Sí 💖</button>
@@ -304,7 +307,7 @@ button {
 
     </div>
 
-    <img src="img/bueno_1.webp" style="width:900px;border-radius:60px;">
+    <img src="img/bueno_1.webp" class="imagen pequeña" style="display:block;">
 
 </div>
 
