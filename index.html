@@ -535,8 +535,8 @@ function crearCorazon() {
 
 function explotar(c) {
 
-    const sonido = document.getElementById("pop");
-    sonido.currentTime = 0;
+    const sonido = new Audio("audio/pop.mp3");
+    sonido.volume = 0.8;   // opcional
     sonido.play();
 
     c.classList.add("explosion");
