@@ -20,24 +20,15 @@ button {
    .caja-papel {
     display: inline-block;
     background-image: url("img/papel_h.png");
-    background-size: contain;   /* 👈 CLAVE */
+    background-size: 100% 100%;   /* CAMBIO */
     background-repeat: no-repeat;
     background-position: center;
-    padding: 60px 120px;       /* un poco más de aire */
+    padding: 50px 90px;
     border-radius: 40px;
-    position: relative;
-    z-index: 50;
 }
-
 .caja-papel-final {
-    display: inline-block;
-    background-image: url("img/papel_v.png");
-    background-size: cover;
-    background-position: center;
-    padding: 50px 70px;
-    border-radius: 50px;
-    position: relative;
-    z-index: 30;
+    background-size: 100% 100%;
+    padding: 40px 60px;
 }
 
 body {
@@ -61,7 +52,7 @@ h1 {
 .imagen {
     width: 780px;
     border-radius: 20px;
-    margin: 20px auto;
+    margin: 5px auto;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     display: none;
 }
@@ -148,13 +139,16 @@ button {
 }
 
 /* ❤️ FINAL ❤️ */
+
 #final {
     display: none;
     position: fixed;
     inset: 0;
     background-color: #ffe6eb;
-    z-index: 999;   /* antes 20 */
-    padding-top: 120px;
+    z-index: 9999;
+    padding-top: 80px;
+    overflow-y: auto;
+    text-align: center;
 }
 
 #titulo,
@@ -173,7 +167,7 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 80px;
+    gap: 25px;
     z-index: 100;
 }
 
